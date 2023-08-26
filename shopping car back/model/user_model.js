@@ -62,7 +62,7 @@ async function register_user(account, password, name, phone, mail) {
 
     await connection.query(insert_query, insert_values);
     console.log('註冊成功');
-    await use_account_get_user_data(account)
+    await use_account_get_user_data(account);
     return true;
   } catch (error) {
     console.error('註冊時發生錯誤:', error);

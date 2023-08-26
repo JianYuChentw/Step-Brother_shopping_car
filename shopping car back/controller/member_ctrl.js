@@ -86,7 +86,7 @@ async function forget_password(req, res) {
     user_index.account
   );
   try {
-    if (!account_exist) {
+    if (!account_exist || account_exist.length === 0) {
       res.json({ account_exist: false });
     } else {
       if (account_exist[0].phone === user_index.phone) {
