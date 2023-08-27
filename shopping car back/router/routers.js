@@ -6,12 +6,10 @@ const shopping = require('../controller/shopping_car_ctrl');
 const path = require('path');
 
 // 測試用
-// routes.get('/', (req, res) => {
-//   const filePath = path.join(__dirname, '../views/test.html');
-//   res.sendFile(filePath);
-// });
-
-routes.get('/', page.home_page);
+routes.get('/', (req, res) => {
+  const filePath = path.join(__dirname, '../views/test.html');
+  res.sendFile(filePath);
+});
 
 //網頁
 routes.get('/stepbrothers', page.home_page);
