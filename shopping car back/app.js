@@ -4,7 +4,7 @@ const cors = require('cors'); //跨來源資源共享模組
 
 const routes = require('./router/routers');
 const tool = require('./model/tool_model');
-const port = process.env.PORT || 30674; // 線上部署用
+const port = process.env.PORT || 3000; // 線上部署用
 // const port = 3000;
 const app = express();
 
