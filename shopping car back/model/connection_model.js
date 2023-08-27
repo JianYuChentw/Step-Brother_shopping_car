@@ -9,12 +9,21 @@ const mysql = require('mysql2/promise');
 // });
 // 資料庫連線資料線上部署用
 const connection = mysql.createPool({
-  host: process.env.MYSQL_HOS || 'zeabur-gcp-asia-east1-1.clusters.zeabur.com',
+  host: process.env.MYSQL_HOST || 'zeabur-gcp-asia-east1-1.clusters.zeabur.com',
   user: process.env.MYSQL_USERNAME || root,
   port: process.env.MYSQL_PORT || 30674,
   password: process.env.MYSQL_PASSWORD || '821NfxPoY946',
   database: process.env.DATABASENAME || 'e-commerce-website',
 });
+
+// 資料庫連線資料線上部署用 "測試用資料庫！！"
+// const connection = mysql.createPool({
+//   host: 'zeabur-gcp-asia-east1-1.clusters.zeabur.com',
+//   user: 'root',
+//   password: '821NfxPoY946',
+//   port: 30674,
+//   database: 'e-commerce-website',
+// });
 
 // 測試資料庫連線
 async function test_connection() {
@@ -28,6 +37,8 @@ async function test_connection() {
     console.error('無法連線到資料庫:', error);
   }
 }
+
+test_connection();
 
 module.exports = {
   connection,
