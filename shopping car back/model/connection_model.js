@@ -9,10 +9,10 @@ const mysql = require('mysql2/promise');
 // });
 // 資料庫連線資料線上部署用
 const connection = mysql.createPool({
-  host: process.env.MYSQL_HOS || '127.0.0.1',
+  host: process.env.MYSQL_HOS || 'zeabur-gcp-asia-east1-1.clusters.zeabur.com',
   user: process.env.MYSQL_USERNAME || root,
-  port: process.env.MYSQL_PORT || 3306,
-  password: process.env.MYSQL_PASSWORD || 'pass123456',
+  port: process.env.MYSQL_PORT || 30674,
+  password: process.env.MYSQL_PASSWORD || '821NfxPoY946',
   database: process.env.DATABASENAME || 'e-commerce-website',
 });
 
