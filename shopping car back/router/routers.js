@@ -5,14 +5,15 @@ const member = require('../controller/member_ctrl');
 const shopping = require('../controller/shopping_car_ctrl');
 const path = require('path');
 
-routes.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '../views/test.html');
-  res.sendFile(filePath);
-});
+// 測試用
+// routes.get('/', (req, res) => {
+//   const filePath = path.join(__dirname, '../views/test.html');
+//   res.sendFile(filePath);
+// });
+
+routes.get('/', page.home_page);
+
 //網頁
-routes.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname) + '/test.html');
-});
 routes.get('/stepbrothers', page.home_page);
 routes.get('/stepbrothers/man', page.man_page);
 routes.get('/stepbrothers/woman', page.woman_page);
