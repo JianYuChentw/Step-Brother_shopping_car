@@ -5,12 +5,6 @@ const member = require('../controller/member_ctrl');
 const shopping = require('../controller/shopping_car_ctrl');
 const path = require('path');
 
-// 測試用
-routes.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '../views/test.html');
-  res.sendFile(filePath);
-});
-
 //導向到登入頁面 "測試用"
 routes.get('/login', (req, res) => {
   const filePath = path.join(__dirname, '../views/loginPage.html');
@@ -22,7 +16,7 @@ routes.get('/userpage', (req, res) => {
   res.sendFile(filePath);
 });
 // 導向到首頁面 測試用
-routes.get('/home', (req, res) => {
+routes.get('/', (req, res) => {
   const filePath = path.join(__dirname, '../views/home.html');
   res.sendFile(filePath);
 });
