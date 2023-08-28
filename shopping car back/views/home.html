@@ -11,6 +11,19 @@
         padding: 0;
         background-color: #f0f0f0;
       }
+      nav {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
       .product-list {
         display: flex;
         flex-wrap: wrap;
@@ -25,19 +38,42 @@
         margin: 10px;
         padding: 15px;
         width: 300px;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
       }
       h2 {
         margin: 0;
+        font-size: 1.5rem;
       }
       h3 {
         margin: 10px 0;
+        font-size: 1.2rem;
+        color: #333;
       }
       p {
         margin: 5px 0;
+        color: #666;
       }
     </style>
   </head>
   <body>
+    <nav>
+      <a href="/home">首頁</a>
+      <a href="/stepbrothers/man">男</a>
+      <a href="/stepbrothers/woman">女</a>
+      <a href="/stepbrothers/kid">童</a>
+      <a href="/stepbrothers/about">關於</a>
+      <a href="/userpage">使用者</a>
+      <a href="/stepbrothers/shopping_history">歷史訂單</a>
+      <a href="/stepbrothers/shopping_car">購物車</a>
+      <a href="/login">登入頁</a>
+      <a href="/stepbrothers/logout">登出</a>
+      <a href="/stepbrothers/register_page">註冊頁</a>
+      <a href="/stepbrothers/:id">單品項目</a>
+    </nav>
     <div class="product-list">
       <!-- 商品列表將顯示於此 -->
     </div>

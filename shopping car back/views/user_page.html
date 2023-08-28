@@ -22,10 +22,37 @@
       .info-item {
         margin-bottom: 10px;
       }
+      nav {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
     </style>
   </head>
   <body>
     <h1>User Information</h1>
+    <nav>
+      <a href="/home">首頁</a>
+      <a href="/stepbrothers/man">男</a>
+      <a href="/stepbrothers/woman">女</a>
+      <a href="/stepbrothers/kid">童</a>
+      <a href="/stepbrothers/about">關於</a>
+      <a href="/userpage">使用者</a>
+      <a href="/stepbrothers/shopping_history">歷史訂單</a>
+      <a href="/stepbrothers/shopping_car">購物車</a>
+      <a href="/login">登入頁</a>
+      <a href="/stepbrothers/logout">登出</a>
+      <a href="/stepbrothers/register_page">註冊頁</a>
+      <a href="/stepbrothers/:id">單品項目</a>
+    </nav>
     <div class="user-info">
       <div class="info-item"><strong>ID:</strong> <span id="id"></span></div>
       <div class="info-item">
