@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      .header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to Your Dashboard</h1>
+    </div>
+    <div class="container">
+      <h2>Hello, User!</h2>
+      <p>
+        This is your personalized dashboard. You can see your account
+        information, activities, and more.
+      </p>
+      <p>
+        Feel free to customize and expand this dashboard to suit your needs.
+      </p>
+      <button id="logout-btn">Logout</button>
+    </div>
+    <script>
+      document
+        .getElementById('logout-btn')
+        .addEventListener('click', function () {
+          // Handle logout action here (e.g., sending a request to log out the user)
+          // After logout, you can redirect the user to the login page
+          window.location.href = 'loginPage.html';
+        });
+    </script>
+  </body>
+</html>

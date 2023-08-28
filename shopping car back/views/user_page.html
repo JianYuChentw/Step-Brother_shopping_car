@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      .user-info {
+        border: 1px solid #ccc;
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+      .info-item {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Information</h1>
+    <div class="user-info">
+      <div class="info-item"><strong>ID:</strong> <span id="id"></span></div>
+      <div class="info-item">
+        <strong>Account:</strong> <span id="account"></span>
+      </div>
+      <div class="info-item">
+        <strong>Name:</strong> <span id="name"></span>
+      </div>
+      <div class="info-item">
+        <strong>Phone:</strong> <span id="phone"></span>
+      </div>
+      <div class="info-item">
+        <strong>Email:</strong> <span id="mail"></span>
+      </div>
+      <div class="info-item">
+        <strong>Grade:</strong> <span id="grade"></span>
+      </div>
+      <div class="info-item">
+        <strong>Create Time:</strong> <span id="create_time"></span>
+      </div>
+      <div class="info-item">
+        <strong>Update Time:</strong> <span id="update_time"></span>
+      </div>
+      <div class="info-item">
+        <strong>Purchase CA:</strong> <span id="purchase_CA"></span>
+      </div>
+      <div class="info-item">
+        <strong>Login Status:</strong> <span id="login_status"></span>
+      </div>
+    </div>
+    <script>
+      window.onload = async function () {
+        try {
+          const response = await fetch('/stepbrothers/user');
+          const data = await response.json();
+
+          document.getElementById('id').textContent = data.id;
+          document.getElementById('account').textContent = data.account;
+          document.getElementById('name').textContent = data.name;
+          document.getElementById('phone').textContent = data.phone;
+          document.getElementById('mail').textContent = data.mail;
+          document.getElementById('grade').textContent = data.grade;
+          document.getElementById('create_time').textContent = data.create_time;
+          document.getElementById('update_time').textContent = data.update_time;
+          document.getElementById('purchase_CA').textContent = data.purchase_CA;
+          document.getElementById('login_status').textContent =
+            data.login_status;
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 省略部分標頭設定 -->
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+
+          // Prepare the data to send to the backend
+          const data = {
+            account: username,
+            password: password,
+          };
+
+          try {
+            // Send a POST request to the login API
+            const response = await fetch('/stepbrothers/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+
+              if (result.login_status) {
+                // Successful login, redirect the user to the user page
+                window.location.href = '/userpage';
+              } else {
+                // Handle failed login (e.g., display an error message)
+                alert('帳號或密碼錯誤');
+              }
+            } else {
+              // Handle failed login (e.g., display an error message)
+              alert('帳號或密碼錯誤');
+            }
+          } catch (error) {
+            console.error('Error during login:', error);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

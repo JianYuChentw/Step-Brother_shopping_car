@@ -11,6 +11,22 @@ routes.get('/', (req, res) => {
   res.sendFile(filePath);
 });
 
+//導向到登入頁面 "測試用"
+routes.get('/login', (req, res) => {
+  const filePath = path.join(__dirname, '../views/loginPage.html');
+  res.sendFile(filePath);
+});
+// 導向到會員頁面 測試用
+routes.get('/userpage', (req, res) => {
+  const filePath = path.join(__dirname, '../views/user_page.html');
+  res.sendFile(filePath);
+});
+// 導向到首頁面 測試用
+routes.get('/home', (req, res) => {
+  const filePath = path.join(__dirname, '../views/home.html');
+  res.sendFile(filePath);
+});
+
 //網頁
 routes.get('/stepbrothers', page.home_page);
 routes.get('/stepbrothers/man', page.man_page);
