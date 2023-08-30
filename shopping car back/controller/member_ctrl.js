@@ -89,11 +89,14 @@ async function forget_password(req, res) {
     if (!account_exist || account_exist.length === 0) {
       res.json({ account_exist: false });
     } else {
-      if (account_exist[0].phone === user_index.phone) {
+      if (
+        account_exist[0].phone === user_index.phone &&
+        account_exist[0].account === user_index.account
+      ) {
         automatic_mail.send_forget_password_mail(account_exist);
-        res.json({ user_phone: true });
+        res.json({ user: true });
       } else {
-        res.json({ user_phone: false });
+        res.json({ user: false });
       }
     }
   } catch (error) {
