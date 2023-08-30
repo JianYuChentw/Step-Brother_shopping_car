@@ -492,12 +492,6 @@ async function checkout_shopping_cart(
       // 修改購物車狀態
       await change_shopping_cart_status(user_id, shopping_cart_id);
 
-      // 更新使用者的 purchase_CA，傳入 ph_id 參數
-      await purchase_history.update_user_CA(user_id, ph_id, sum);
-
-      // 更新使用者等級
-      await purchase_history.update_user_grade(user_id);
-
       // 更新商品库存
       const update_stock_success = await product.update_product_stock(
         product_id,
