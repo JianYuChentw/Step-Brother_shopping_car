@@ -16,7 +16,8 @@ routes.get('/userpage', (req, res) => {
   res.sendFile(filePath);
 });
 // 導向到首頁面 測試用
-routes.get('/home', (req, res) => {
+routes.get('/', (req, res) => {
+  console.log('home');
   const filePath = path.join(__dirname, '../views/home.html');
   res.sendFile(filePath);
 });
