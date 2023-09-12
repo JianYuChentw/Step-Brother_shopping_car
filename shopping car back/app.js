@@ -5,8 +5,8 @@ const path = require('path');
 
 const routes = require('./router/routers');
 const tool = require('./model/tool_model');
-// const port = process.env.PORT || 3000; // 線上部署用
-const port = 3000;
+const port = process.env.PORT || 3000; // 線上部署用
+// const port = 3000;
 const app = express();
 
 //* 啟動ejs
