@@ -99,8 +99,8 @@ async function history_page(req, res) {
       const history = await purchase_history.get_detailed_purchase_history(
         id_card.id
       );
-      console.log(history);
-      res.json(history);
+      console.log(history.reverse());
+      res.json(history.reverse());
     } else {
       res.json({ login_status: false });
     }

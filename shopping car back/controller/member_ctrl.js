@@ -88,11 +88,9 @@ async function forget_password(req, res) {
   try {
     if (!account_exist || account_exist.length === 0) {
       res.json({ account_exist: false });
+      return;
     } else {
-      if (
-        account_exist[0].phone === user_index.phone &&
-        account_exist[0].account === user_index.account
-      ) {
+      if (account_exist[0].phone === user_index.phone) {
         automatic_mail.send_forget_password_mail(account_exist);
         res.json({ user: true });
       } else {
