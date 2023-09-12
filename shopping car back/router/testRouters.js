@@ -25,11 +25,14 @@ routes.get('/userpage', (req, res) => {
 });
 
 //網頁
+routes.get('/stepbrothers', page.home_page);
 routes.get('/stepbrothers/man', page.man_page);
 routes.get('/stepbrothers/woman', page.woman_page);
 routes.get('/stepbrothers/kids', page.kid_page);
+routes.get('/stepbrothers/user', page.user_page);
 routes.get('/stepbrothers/purchase_history', page.history_page);
 routes.get('/stepbrothers/shopping_car', page.car_page);
+routes.get('/stepbrothers/login_page', page.login_page);
 routes.get('/stepbrothers/register_page', page.register_page);
 routes.get('/stepbrothers/check_out', page.check_page);
 routes.get('/stepbrothers/update_user_data_page', page.update_user_page);
