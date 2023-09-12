@@ -3,7 +3,8 @@ const session = require('express-session');
 const cors = require('cors'); //跨來源資源共享模組
 const path = require('path');
 
-const routes = require('./router/routers');
+// const routes = require('./router/routers');
+const routes = require('./router/test_routes'); // 線上部署用
 const tool = require('./model/tool_model');
 const port = process.env.PORT || 3000; // 線上部署用
 // const port = 3000;
