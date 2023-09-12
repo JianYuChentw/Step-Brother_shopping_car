@@ -5,16 +5,6 @@ const member = require('../controller/member_ctrl');
 const shopping = require('../controller/shopping_car_ctrl');
 const path = require('path');
 
-//導向到登入頁面 "測試用"
-routes.get('/login', (req, res) => {
-  const filePath = path.join(__dirname, '../views/loginPage.html');
-  res.sendFile(filePath);
-});
-// 導向到會員頁面 測試用
-routes.get('/userpage', (req, res) => {
-  const filePath = path.join(__dirname, '../views/user_page.html');
-  res.sendFile(filePath);
-});
 // 導向到首頁面 測試用
 routes.get('/', (req, res) => {
   console.log('home');
@@ -22,15 +12,24 @@ routes.get('/', (req, res) => {
   res.sendFile(filePath);
 });
 
+//導向到登入頁面 "測試用"
+routes.get('/login', (req, res) => {
+  const filePath = path.join(__dirname, '../views/loginPage.html');
+  res.sendFile(filePath);
+});
+
+// 導向到會員頁面 測試用
+routes.get('/userpage', (req, res) => {
+  const filePath = path.join(__dirname, '../views/user_page.html');
+  res.sendFile(filePath);
+});
+
 //網頁
-routes.get('/stepbrothers', page.home_page);
 routes.get('/stepbrothers/man', page.man_page);
 routes.get('/stepbrothers/woman', page.woman_page);
 routes.get('/stepbrothers/kids', page.kid_page);
-routes.get('/stepbrothers/user', page.user_page);
 routes.get('/stepbrothers/purchase_history', page.history_page);
 routes.get('/stepbrothers/shopping_car', page.car_page);
-routes.get('/stepbrothers/login_page', page.login_page);
 routes.get('/stepbrothers/register_page', page.register_page);
 routes.get('/stepbrothers/check_out', page.check_page);
 routes.get('/stepbrothers/update_user_data_page', page.update_user_page);
@@ -60,4 +59,4 @@ routes.post('/stepbrothers/submit_shopping_car', shopping.buy_car_product); //�
 routes.get('/stepbrothers/:id', page.product_page);
 
 // 路由輸出
-module.exports = test_routes;
+module.exports = routes;
