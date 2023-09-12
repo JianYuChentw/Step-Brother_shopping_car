@@ -61,5 +61,12 @@ routes.post('/stepbrothers/submit_shopping_car', shopping.buy_car_product); //�
 // 指定商品頁//動態路由
 routes.get('/stepbrothers/:id', page.product_page);
 
+// 導向指定商品頁//動態路由 測試用
+routes.get('/:id', (req, res) => {
+  console.log('home');
+  const filePath = path.join(__dirname, '../views/oneProduct.html');
+  res.sendFile(filePath);
+});
+
 // 路由輸出
 module.exports = routes;

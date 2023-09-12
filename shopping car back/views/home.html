@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>商品列表</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Raleway:ital@1&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -31,6 +37,13 @@
         align-items: flex-start;
         padding: 20px;
       }
+
+      .product-list a {
+        text-decoration: none;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-family: 'Raleway', sans-serif;
+      }
+
       .product-card {
         background-color: white;
         border-radius: 5px;
@@ -72,22 +85,25 @@
       <a href="/login">登入頁</a>
       <a href="/stepbrothers/logout">登出</a>
       <a href="/stepbrothers/register_page">註冊頁</a>
-      <a href="/stepbrothers/:id">單品項目</a>
     </nav>
     <div class="product-list">
-      <!-- 商品列表將顯示於此 -->
+      <!-- 商品列表将显示于此 -->
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', async function () {
         try {
-          // Send a GET request to the product API
+          // 发送 GET 请求到商品 API
           const response = await fetch('/stepbrothers');
           const products = await response.json();
 
           const productListDiv = document.querySelector('.product-list');
 
-          // Loop through each product and create a product card
+          // 遍历每个商品并创建商品卡片
           products.forEach((product) => {
+            const productCardLink = document.createElement('a');
+            productCardLink.href = `/${product.id}`; // 设置链接到商品详情页面
+            productCardLink.className = 'product-card-link';
+
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
 
@@ -108,7 +124,9 @@
             productCard.appendChild(price);
             productCard.appendChild(productClass);
 
-            productListDiv.appendChild(productCard);
+            productCardLink.appendChild(productCard);
+
+            productListDiv.appendChild(productCardLink);
           });
         } catch (error) {
           console.error('Error fetching product data:', error);
