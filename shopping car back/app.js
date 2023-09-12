@@ -38,7 +38,7 @@ app.use(
 app.use(sessionMiddleware);
 
 //帶入bodyParser
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+// app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', routes);
