@@ -12,6 +12,27 @@ routes.get('/', (req, res) => {
   res.sendFile(filePath);
 });
 
+// 導向到男裝頁面 測試用
+routes.get('/man', (req, res) => {
+  console.log('man');
+  const filePath = path.join(__dirname, '../views/man.html');
+  res.sendFile(filePath);
+});
+
+// 導向到女裝頁面 測試用
+routes.get('/woman', (req, res) => {
+  console.log('woman');
+  const filePath = path.join(__dirname, '../views/woman.html');
+  res.sendFile(filePath);
+});
+
+// 導向到童裝頁面 測試用
+routes.get('/kid', (req, res) => {
+  console.log('kid');
+  const filePath = path.join(__dirname, '../views/kids.html');
+  res.sendFile(filePath);
+});
+
 //導向到登入頁面 "測試用"
 routes.get('/login', (req, res) => {
   const filePath = path.join(__dirname, '../views/loginPage.html');

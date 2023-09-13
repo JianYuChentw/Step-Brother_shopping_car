@@ -72,14 +72,18 @@
       #sizeStock p {
         font-size: 1rem;
       }
+
+      #quantityInput {
+        width: 100px;
+      }
     </style>
   </head>
   <body>
     <nav>
       <a href="/">首頁</a>
-      <a href="/stepbrothers/man">男</a>
-      <a href="/stepbrothers/woman">女</a>
-      <a href="/stepbrothers/kid">童</a>
+      <a href="/man">男</a>
+      <a href="/woman">女</a>
+      <a href="/kid">童</a>
       <a href="/stepbrothers/about">關於</a>
       <a href="/userpage">使用者</a>
       <a href="/stepbrothers/shopping_history">歷史訂單</a>
@@ -94,9 +98,18 @@
         <h2 id="productName"></h2>
         <p id="productDescription"></p>
         <p id="productPrice"></p>
-        <div id="sizeStock">
-          <!-- 商品尺寸和庫存將顯示於此 -->
-        </div>
+
+        <select id="sizeSelect">
+          <!-- 下拉選單將用於尺寸選擇 -->
+        </select>
+        <input
+          type="number"
+          id="quantityInput"
+          placeholder="請輸入數量"
+          min="0"
+          max=""
+        />
+        <button id="addToCartBtn">新增至購物車</button>
       </div>
     </div>
 
@@ -126,14 +139,65 @@
               'productPrice'
             ).textContent = `價格：${data.price}元`; // 更新為data.price
 
-            // 渲染尺寸和庫存信息
-            const sizeStockDiv = document.getElementById('sizeStock');
-            sizeStockDiv.innerHTML = ''; // 清空之前的內容
+            // 渲染尺寸和庫存信息以及下拉選單
+            const sizeSelect = document.getElementById('sizeSelect');
+            const quantityInput = document.getElementById('quantityInput');
+
+            sizeSelect.innerHTML = '<option value="">選擇尺寸</option>'; // 清空之前的選項
 
             data.size_stock.forEach((sizeStock) => {
-              const sizeStockItem = document.createElement('p');
-              sizeStockItem.textContent = `Size ${sizeStock.size}: 庫存尚餘： ${sizeStock.stock}`;
-              sizeStockDiv.appendChild(sizeStockItem);
+              // 創建下拉選項
+              const sizeOption = document.createElement('option');
+              sizeOption.value = sizeStock.size;
+              sizeOption.textContent = `Size ${sizeStock.size}: 庫存尚餘： ${sizeStock.stock}`;
+              sizeSelect.appendChild(sizeOption);
+            });
+
+            // 設定數量輸入的max屬性為庫存尚餘數量
+            const maxStock = Math.max(
+              ...data.size_stock.map((sizeStock) => sizeStock.stock)
+            );
+            quantityInput.max = maxStock;
+
+            // 新增至購物車按鈕的點擊事件處理程序
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            // 新增至購物車按鈕的點擊事件處理程序
+
+            addToCartBtn.addEventListener('click', () => {
+              const selectedSize = sizeSelect.value;
+              const quantity = quantityInput.value;
+
+              if (selectedSize && quantity) {
+                // 發送POST請求以將商品添加到購物車
+                fetch(`/stepbrothers/${id}/add`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    size: selectedSize,
+                    quantity: quantity,
+                  }),
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.login_state === false) {
+                      // 如果收到 login_state: false，顯示警告並轉跳至登入頁面
+                      alert('尚未登入！');
+                      window.location.href = '/login'; // 轉跳至登入頁面
+                    } else if (data.success) {
+                      alert('商品已成功添加到購物車！');
+                    } else {
+                      alert('添加商品到購物車失敗。');
+                    }
+                  })
+                  .catch((error) => {
+                    console.error('發生錯誤：', error);
+                    alert('添加商品到購物車失敗。');
+                  });
+              } else {
+                alert('請選擇尺寸並輸入數量。');
+              }
             });
           } else {
             // 處理錯誤

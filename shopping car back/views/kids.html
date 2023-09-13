@@ -109,7 +109,7 @@
       document.addEventListener('DOMContentLoaded', async function () {
         try {
           // 发送 GET 请求到商品 API
-          const response = await fetch('/stepbrothers');
+          const response = await fetch('/stepbrothers/kids');
           const products = await response.json();
 
           const productListDiv = document.querySelector('.product-list');

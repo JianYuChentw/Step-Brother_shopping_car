@@ -66,9 +66,9 @@
   <body>
     <nav>
       <a href="/">首頁</a>
-      <a href="/stepbrothers/man">男</a>
-      <a href="/stepbrothers/woman">女</a>
-      <a href="/stepbrothers/kid">童</a>
+      <a href="/man">男</a>
+      <a href="/woman">女</a>
+      <a href="/kid">童</a>
       <a href="/stepbrothers/about">關於</a>
       <a href="/userpage">使用者</a>
       <a href="/stepbrothers/shopping_history">歷史訂單</a>
@@ -88,21 +88,38 @@
       </form>
     </div>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // 發送 GET 請求到確認登入狀態的 API
+          const response = await fetch('/stepbrothers/login_page');
+          const loginStatus = await response.json();
+
+          if (loginStatus.login_status) {
+            // 如果已經登入，彈出提示框並轉跳至使用者頁面
+            alert('你已經登入');
+            window.location.href = '/userpage';
+          } else {
+            // 如果尚未登入，保持在登入頁面
+          }
+        } catch (error) {
+          console.error('獲取登入狀態時發生錯誤：', error);
+        }
+
+        // 以下是登入表單的處理程式碼，與你之前的程式碼一樣
         const form = document.getElementById('login-form');
         form.addEventListener('submit', async function (event) {
           event.preventDefault();
           const username = document.getElementById('username').value;
           const password = document.getElementById('password').value;
 
-          // Prepare the data to send to the backend
+          // 準備要發送到後端的數據
           const data = {
             account: username,
             password: password,
           };
 
           try {
-            // Send a POST request to the login API
+            // 發送 POST 請求到登入 API，並處理登入結果
             const response = await fetch('/stepbrothers/login', {
               method: 'POST',
               headers: {
@@ -115,18 +132,19 @@
               const result = await response.json();
 
               if (result.login_status) {
-                // Successful login, redirect the user to the user page
+                // 登入成功，彈出提示框並轉跳至使用者頁面
+                alert('登入成功');
                 window.location.href = '/userpage';
               } else {
-                // Handle failed login (e.g., display an error message)
+                // 處理登入失敗情況（例如，顯示錯誤消息）
                 alert('帳號或密碼錯誤');
               }
             } else {
-              // Handle failed login (e.g., display an error message)
+              // 處理登入失敗情況（例如，顯示錯誤消息）
               alert('帳號或密碼錯誤');
             }
           } catch (error) {
-            console.error('Error during login:', error);
+            console.error('登入時發生錯誤：', error);
           }
         });
       });
