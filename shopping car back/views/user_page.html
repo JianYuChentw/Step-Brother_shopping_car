@@ -159,12 +159,29 @@
           console.error('Error fetching user data:', error);
         }
       };
+
+      //登入狀態判定
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // 發送 GET 請求到確認登入狀態的 API
+          const response = await fetch('/stepbrothers/login_page');
+          const loginStatus = await response.json();
+
+          if (!loginStatus.login_status) {
+            // 如果已經登入，彈出提示框並轉跳至使用者頁面
+            alert('尚未登入');
+            window.location.href = '/login';
+          }
+        } catch (error) {
+          console.error('獲取登入狀態時發生錯誤：', error);
+        }
+      });
     </script>
     <script>
       // 獲取"登出"連結元素
       const logoutLink = document.getElementById('logout');
 
-      // 添加點擊事件處理程序
+      // 點擊登出
       logoutLink.addEventListener('click', async (event) => {
         event.preventDefault(); // 阻止默認的連結跳轉行為
 
