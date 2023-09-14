@@ -99,7 +99,7 @@
       <a href="/stepbrothers/shopping_history">歷史訂單</a>
       <a href="/stepbrothers/shopping_car">購物車</a>
       <a href="/login">登入頁</a>
-      <a href="/stepbrothers/logout">登出</a>
+      <a id="logout" href="/stepbrothers/logout">登出</a>
       <a href="/stepbrothers/register_page">註冊頁</a>
     </nav>
     <div class="product-list">
@@ -145,6 +145,35 @@
           });
         } catch (error) {
           console.error('Error fetching product data:', error);
+        }
+      });
+    </script>
+    <script>
+      // 獲取"登出"連結元素
+      const logoutLink = document.getElementById('logout');
+
+      // 添加點擊事件處理程序
+      logoutLink.addEventListener('click', async (event) => {
+        event.preventDefault(); // 阻止默認的連結跳轉行為
+
+        try {
+          // 發送登出請求到後端的'/stepbrothers/logout'路由
+          const response = await fetch('/stepbrothers/logout', {
+            method: 'GET', // 或 'POST'，取決於你的後端設置
+          });
+
+          if (response.ok) {
+            // 如果登出成功，顯示成功消息
+            alert('登出成功！');
+            // 你可以在這裡添加額外的處理，例如重定向到登入頁面
+            window.location.href = '/login'; // 重定向到登入頁面，這部分可以根據你的需要調整
+          } else {
+            // 如果登出失敗，顯示錯誤消息
+            alert('登出失敗。');
+          }
+        } catch (error) {
+          console.error('登出請求失敗：', error);
+          alert('登出失敗。');
         }
       });
     </script>
