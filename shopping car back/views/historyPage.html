@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歷史購物紀錄</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Raleway:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-family: 'Raleway', sans-serif;
+      }
+
+      nav {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 2rem;
+      }
+
+      .history-container {
+        width: 90vw;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .order {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+
+      .product:hover {
+        background-color: rgb(254, 254, 205);
+      }
+
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .orderTitle {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .order-header h3 {
+        font-size: 1.5rem;
+      }
+
+      .order-status {
+        font-weight: bold;
+      }
+
+      .order-summary {
+        font-weight: bold;
+      }
+
+      .order-recipient-info {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .product-list {
+        margin-top: 10px;
+      }
+
+      .product {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: aqua;
+      }
+
+      .product-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .product-info p {
+        margin: 0;
+      }
+
+      .product-subtotal {
+        font-weight: bold;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .order-title-row {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">首頁</a>
+      <a href="/man">男</a>
+      <a href="/woman">女</a>
+      <a href="/kid">童</a>
+      <a href="/userpage">使用者</a>
+      <a href="/historyPage">歷史訂單</a>
+      <a href="/stepbrothers/shopping_car">購物車</a>
+      <a href="/login">登入頁</a>
+      <a id="logout" href="/stepbrothers/logout">登出</a>
+      <a href="/stepbrothers/register_page">註冊頁</a>
+    </nav>
+    <h1>歷史購物紀錄</h1>
+    <div class="history-container" id="history-container">
+      <!-- 此處將使用JavaScript填充歷史購物記錄 -->
+    </div>
+
+    <script>
+      // 在全局范围内定义一个函数来处理展开和收缩的交互
+      function toggleProductList(orderDiv) {
+        const productList = orderDiv.querySelector('.product-list');
+        productList.classList.toggle('hidden');
+      }
+
+      // 登入狀態判定
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // 發送 GET 請求到確認登入狀態的 API
+          const response = await fetch('/stepbrothers/login_page');
+          const loginStatus = await response.json();
+
+          if (!loginStatus.login_status) {
+            // 如果已經登入，彈出提示框並轉跳至使用者頁面
+            alert('尚未登入');
+            window.location.href = '/login';
+          }
+        } catch (error) {
+          console.error('獲取登入狀態時發生錯誤：', error);
+        }
+      });
+
+      const historyContainer = document.getElementById('history-container');
+
+      function purchaseStatusSwitch(n) {
+        if (n == 1) return '準備中';
+        if (n == 2) return '審核中';
+        if (n == 3) return '已取消';
+        if (n == 4) return '已完成';
+      }
+
+      // 使用 fetch 從後端取得歷史購物記錄資料
+      fetch('/stepbrothers/purchase_history')
+        .then((response) => response.json())
+        .then((historyData) => {
+          historyData.forEach((order) => {
+            const orderDiv = document.createElement('div');
+            orderDiv.classList.add('order');
+
+            // 創建訂單標題
+            const orderHeader = document.createElement('div');
+            orderHeader.classList.add('order-header');
+
+            const orderTitle = document.createElement('div');
+            orderTitle.classList.add('orderTitle');
+
+            const orderId = document.createElement('h3');
+            orderId.textContent = `訂單編號: ${order.id}`;
+
+            const orderStatus = document.createElement('span');
+            orderStatus.classList.add('order-status');
+            orderStatus.textContent = `狀態: ${purchaseStatusSwitch(
+              order.purchases[0].purchase_status
+            )}`;
+
+            const orderRecipientInfo = document.createElement('div');
+            orderRecipientInfo.classList.add('order-recipient-info');
+
+            const recipientName = document.createElement('span');
+            recipientName.classList.add('recipient-name');
+            recipientName.textContent = `收件人姓名: ${order.recipient_name}`;
+
+            const recipientPhone = document.createElement('span');
+            recipientPhone.classList.add('recipient-phone');
+            recipientPhone.textContent = `收件人電話: ${order.recipient_phone}`;
+
+            const recipientAddress = document.createElement('span');
+            recipientAddress.classList.add('recipient-address');
+            recipientAddress.textContent = `收件人地址: ${order.recipient_address}`;
+
+            const openDown = document.createElement('span');
+            openDown.classList.add('openDown');
+            openDown.textContent = `▾`;
+
+            const orderSummary = document.createElement('span');
+            orderSummary.classList.add('order-summary');
+            orderSummary.textContent = `總金額: $${order.sum}`;
+
+            orderTitle.appendChild(orderId);
+            orderTitle.appendChild(orderStatus);
+            orderTitle.appendChild(orderSummary);
+            orderRecipientInfo.appendChild(recipientName);
+            orderRecipientInfo.appendChild(recipientPhone);
+            orderRecipientInfo.appendChild(recipientAddress);
+
+            orderHeader.appendChild(orderTitle);
+            orderHeader.appendChild(orderRecipientInfo);
+            orderHeader.appendChild(openDown);
+            // 创建一个可点击的标题行，用于展开和收缩商品内容
+            const titleRow = document.createElement('div');
+            titleRow.classList.add('order-title-row');
+            titleRow.addEventListener('click', () => {
+              toggleProductList(orderDiv);
+            });
+
+            titleRow.appendChild(orderHeader);
+
+            orderDiv.appendChild(titleRow);
+
+            // 創建商品清單
+            const productList = document.createElement('div');
+            productList.classList.add('product-list', 'hidden'); // 初始时隐藏
+
+            order.purchases.forEach((product) => {
+              const productDiv = document.createElement('div');
+              productDiv.classList.add('product');
+
+              const productInfo = document.createElement('div');
+              productInfo.classList.add('product-info');
+
+              const productDetail = document.createElement('p');
+              productDetail.textContent = `${product.brand_name} - ${product.product_name} - Size ${product.size}`;
+
+              const productSubtotal = document.createElement('p');
+              productSubtotal.classList.add('product-subtotal');
+              productSubtotal.textContent = `小計: $${product.subtotal}`;
+
+              productInfo.appendChild(productDetail);
+              productInfo.appendChild(productSubtotal);
+
+              productDiv.appendChild(productInfo);
+              productList.appendChild(productDiv);
+            });
+
+            orderDiv.appendChild(productList);
+
+            historyContainer.appendChild(orderDiv);
+          });
+        })
+        .catch((error) => {
+          console.error('Error fetching purchase history:', error);
+        });
+    </script>
+    <script>
+      // 獲取"登出"連結元素
+      const logoutLink = document.getElementById('logout');
+
+      // 點擊登出
+      logoutLink.addEventListener('click', async (event) => {
+        event.preventDefault(); // 阻止默認的連結跳轉行為
+
+        try {
+          // 發送登出請求到後端的'/stepbrothers/logout'路由
+          const response = await fetch('/stepbrothers/logout', {
+            method: 'GET', // 或 'POST'，取決於你的後端設置
+          });
+
+          if (response.ok) {
+            // 如果登出成功，顯示成功消息
+            alert('登出成功！');
+            // 你可以在這裡添加額外的處理，例如重定向到登入頁面
+            window.location.href = '/login'; // 重定向到登入頁面，這部分可以根據你的需要調整
+          } else {
+            // 如果登出失敗，顯示錯誤消息
+            alert('登出失敗。');
+          }
+        } catch (error) {
+          console.error('登出請求失敗：', error);
+          alert('登出失敗。');
+        }
+      });
+    </script>
+  </body>
+</html>
