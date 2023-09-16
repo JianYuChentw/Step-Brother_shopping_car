@@ -73,7 +73,9 @@
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
+        padding: 5px;
         margin: 10px 0;
+        border-bottom: 1px solid #ccc;
       }
 
       .orderHeader h3 {
@@ -100,9 +102,18 @@
 
       .product-list {
         margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .product-list button {
+        width: 100px;
       }
 
       .product {
+        width: 90%;
         margin-bottom: 10px;
         border: 1px solid #ddd;
         padding: 10px;
@@ -280,6 +291,22 @@
               productList.appendChild(productDiv);
             });
 
+            // 創建取消訂單按鈕
+            const cancelOrderButton = document.createElement('button');
+            cancelOrderButton.textContent = '取消訂單';
+            cancelOrderButton.classList.add('cancel-order-button');
+            productList.appendChild(cancelOrderButton);
+
+            // 添加點擊事件處理程序，檢查條件並執行取消訂單的動作
+            cancelOrderButton.addEventListener('click', () => {
+              if (order.purchases[0].purchase_status === 1) {
+                // 執行取消訂單的API請求
+                cancelOrder(order.time);
+              } else {
+                alert('無法異動此訂單。');
+              }
+            });
+
             orderDiv.appendChild(productList);
 
             historyContainer.appendChild(orderDiv);
@@ -288,6 +315,32 @@
         .catch((error) => {
           console.error('Error fetching purchase history:', error);
         });
+
+      function cancelOrder(orderTime) {
+        // 執行取消訂單的API請求，使用 fetch 或其他方法
+        fetch('/stepbrother/cancel_order', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'YourAuthTokenHere', // 你的授權令牌
+          },
+          body: JSON.stringify({ time: orderTime }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.cancel_result) {
+              // 更新訂單狀態或頁面
+              alert('訂單已成功取消。');
+              // 刷新頁面
+              location.reload();
+            } else {
+              alert('無法取消訂單。');
+            }
+          })
+          .catch((error) => {
+            console.error('取消訂單時出錯：', error);
+          });
+      }
     </script>
 
     <script>
@@ -305,8 +358,6 @@
           .then((responseData) => {
             console.log(responseData);
             if (!responseData.login_status) {
-              alert('您尚未登入！');
-            } else if (responseData.login_status) {
               // 如果登出成功，導向登入頁
               alert('登出成功！');
               window.location.href = '/login';
