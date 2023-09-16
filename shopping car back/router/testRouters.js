@@ -33,6 +33,12 @@ routes.get('/kid', (req, res) => {
   res.sendFile(filePath);
 });
 
+// 導向到購物車頁面 測試用
+routes.get('/shoppingCar', (req, res) => {
+  const filePath = path.join(__dirname, '../views/shoppingCar.html');
+  res.sendFile(filePath);
+});
+
 //導向到登入頁面 "測試用"
 routes.get('/login', (req, res) => {
   const filePath = path.join(__dirname, '../views/loginPage.html');
@@ -42,6 +48,18 @@ routes.get('/login', (req, res) => {
 // 導向到會員頁面 測試用
 routes.get('/userpage', (req, res) => {
   const filePath = path.join(__dirname, '../views/user_page.html');
+  res.sendFile(filePath);
+});
+
+// 導向到購物紀錄頁面 測試用
+routes.get('/historyPage', (req, res) => {
+  const filePath = path.join(__dirname, '../views/historyPage.html');
+  res.sendFile(filePath);
+});
+
+// 導向到結帳頁面 測試用
+routes.get('/checkPage', (req, res) => {
+  const filePath = path.join(__dirname, '../views/checkPage.html');
   res.sendFile(filePath);
 });
 

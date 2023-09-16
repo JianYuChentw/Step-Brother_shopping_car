@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>購物車</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Raleway:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-family: 'Raleway', sans-serif;
+      }
+
+      nav {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      #cartAll {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .cart-container {
+        width: 70%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .cart-item {
+        width: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        border-radius: 5px;
+      }
+
+      .cart-item-name {
+        font-weight: bold;
+      }
+
+      .cart-item-actions {
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .cart-item-quantity {
+        display: flex;
+        flex-direction: row;
+        margin-right: 20px;
+        width: 50px;
+      }
+
+      .cart-item-quantity-value {
+        padding: 3px;
+      }
+
+      .cart-item-remove {
+        color: red;
+        cursor: pointer;
+      }
+
+      .total {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: end;
+      }
+
+      .total p {
+        margin: 10px 0 0 0;
+      }
+      .line {
+        height: 2px;
+        width: 100%;
+        background-color: rgb(167, 166, 166);
+      }
+
+      #otherButton {
+        width: 30vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      #otherButton button {
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">首頁</a>
+      <a href="/man">男</a>
+      <a href="/woman">女</a>
+      <a href="/kid">童</a>
+      <a href="/userpage">使用者</a>
+      <a href="/historyPage">歷史訂單</a>
+      <a href="/stepbrothers/shopping_car">購物車</a>
+      <a href="/login">登入頁</a>
+      <a id="logout" href="/stepbrothers/logout">登出</a>
+    </nav>
+
+    <div id="cartAll">
+      <div class="cart-container" id="cart-container">
+        <!-- JavaScript 購物車内容 -->
+      </div>
+      <div id="otherButton">
+        <a href="/"> <button id="buyMore">再去逛逛！</button> </a
+        ><a href="/checkPage">
+          <button id="goCheckOut">去結帳！</button>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      //登入狀態判定
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // 發送 GET 請求到確認登入狀態的 API
+          const response = await fetch('/stepbrothers/login_page');
+          const loginStatus = await response.json();
+
+          if (!loginStatus.login_status) {
+            // 如果已經登入，彈出提示框並轉跳至使用者頁面
+            alert('尚未登入');
+            window.location.href = '/login';
+          }
+        } catch (error) {
+          console.error('獲取登入狀態時發生錯誤：', error);
+        }
+      });
+
+      const cartContainer = document.getElementById('cart-container');
+
+      // 取得購物車內容
+      async function getCartData() {
+        try {
+          const response = await fetch('/stepbrothers/shopping_car', {
+            headers: {
+              Authorization: 'YourAuthTokenHere', //預存令牌
+            },
+          });
+          const cartData = await response.json();
+          renderCart(cartData);
+          return cartData;
+        } catch (error) {
+          console.error('取得購物車時資料錯誤', error);
+        }
+      }
+
+      function renderCart(cartData) {
+        cartContainer.innerHTML = '';
+        if (!cartData.shopping_cart) {
+          // 確認購物車商品
+          cartContainer.innerHTML =
+            '<p>尚未有任何商品，快去加入喜歡的商品吧！</p>';
+        } else {
+          cartData.shopping_cart.forEach((item) => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+
+            const itemName = document.createElement('div');
+            itemName.classList.add('cart-item-name');
+            itemName.textContent = `${item.brand_name} - ${item.product_name}`;
+
+            const itemActions = document.createElement('div');
+            itemActions.classList.add('cart-item-actions');
+
+            const quantityContainer = document.createElement('div');
+            quantityContainer.classList.add('cart-item-quantity');
+
+            const decreaseButton = document.createElement('button');
+            decreaseButton.classList.add('cart-item-decrease');
+            decreaseButton.textContent = '-';
+            decreaseButton.addEventListener('click', () =>
+              decreaseQuantity(item.id, quantityValue)
+            );
+
+            const quantityValue = document.createElement('span');
+            quantityValue.classList.add('cart-item-quantity-value');
+            quantityValue.textContent = item.quantity;
+
+            const increaseButton = document.createElement('button');
+            increaseButton.classList.add('cart-item-increase');
+            increaseButton.textContent = '+';
+            increaseButton.addEventListener('click', () =>
+              increaseQuantity(item.id, quantityValue)
+            );
+
+            quantityContainer.appendChild(decreaseButton);
+            quantityContainer.appendChild(quantityValue);
+            quantityContainer.appendChild(increaseButton);
+
+            const itemRemove = document.createElement('button');
+            itemRemove.classList.add('cart-item-remove');
+            itemRemove.textContent = '移除';
+            itemRemove.addEventListener('click', () => removeFromCart(item.id));
+
+            itemActions.appendChild(quantityContainer);
+            itemActions.appendChild(itemRemove);
+
+            cartItem.appendChild(itemName);
+            cartItem.appendChild(itemActions);
+
+            cartContainer.appendChild(cartItem);
+          });
+        }
+        const sum = cartData.shopping_cart_sum;
+        //價格層
+        const totla = document.createElement('div');
+        totla.classList.add('total');
+        // 合計
+        const original_total = document.createElement('p');
+        original_total.setAttribute('id', 'original_total');
+        original_total.textContent = `合計金額： ${sum.original_total}`;
+        // 折扣
+        const difference = document.createElement('p');
+        difference.setAttribute('id', 'difference');
+        difference.textContent = `折扣金額： ${
+          sum.original_total - sum.final_total
+        }`;
+
+        //橫線
+        const line = document.createElement('p');
+        line.classList.add('line');
+        // 總價
+        const final_total = document.createElement('p');
+        final_total.setAttribute('id', 'final_total');
+        final_total.textContent = `總金額： ${sum.final_total}`;
+
+        totla.appendChild(original_total);
+        totla.appendChild(difference);
+        totla.appendChild(line);
+        totla.appendChild(final_total);
+        cartContainer.appendChild(totla);
+      }
+
+      // 增加數量
+      function increaseQuantity(itemId, quantityElement) {
+        const newValue = parseInt(quantityElement.textContent) + 1;
+        quantityElement.textContent = newValue;
+        updateQuantity(itemId, newValue);
+      }
+
+      // 減少數量
+      function decreaseQuantity(itemId, quantityElement) {
+        const newValue = parseInt(quantityElement.textContent) - 1;
+        if (newValue >= 1) {
+          quantityElement.textContent = newValue;
+          updateQuantity(itemId, newValue);
+        }
+      }
+
+      // 監聽按鈕的點擊事件
+      const increaseButtons = document.querySelectorAll('.cart-item-increase');
+      const decreaseButtons = document.querySelectorAll('.cart-item-decrease');
+
+      increaseButtons.forEach((button) => {
+        const itemId = button.getAttribute('data-item-id');
+        const quantityValue = button.parentElement.querySelector(
+          '.cart-item-quantity-value'
+        );
+        button.addEventListener('click', () =>
+          increaseQuantity(itemId, quantityValue)
+        );
+      });
+
+      decreaseButtons.forEach((button) => {
+        const itemId = button.getAttribute('data-item-id');
+        const quantityValue = button.parentElement.querySelector(
+          '.cart-item-quantity-value'
+        );
+        button.addEventListener('click', () =>
+          decreaseQuantity(itemId, quantityValue)
+        );
+      });
+
+      // 从购物车中移除商品
+      async function removeFromCart(cartItemId) {
+        try {
+          const response = await fetch('/stepbrothers/delete_car', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'YourAuthTokenHere', // 请替换为你的身份验证令牌
+            },
+            body: JSON.stringify({
+              shopping_car_id: cartItemId,
+            }),
+          });
+          const result = await response.json();
+          if (result.grade) {
+            // 移除成功，可以更新页面
+            getCartData();
+          } else {
+            console.error('移除购物车商品时发生错误：', result);
+          }
+        } catch (error) {
+          console.error('移除购物车商品时发生错误：', error);
+        }
+      }
+
+      async function updateQuantity(cartItemId, newQuantity) {
+        try {
+          const response = await fetch(
+            '/stepbrothers/update_shopping_car_quantity',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'YourAuthTokenHere', // 请替换为你的身份验证令牌
+              },
+              body: JSON.stringify({
+                shopping_car_id: cartItemId,
+                quantity: newQuantity,
+              }),
+            }
+          );
+          const result = await response.json();
+          if (result.grade) {
+            // 更新成功，可以更新页面
+            getCartData();
+          } else {
+            console.error('更新购物车数量时发生错误：', result);
+          }
+        } catch (error) {
+          console.error('更新购物车数量时发生错误：', error);
+        }
+      }
+
+      // 初始化购物车页面
+      getCartData();
+    </script>
+
+    <script>
+      // 獲取"登出"連結元素
+      const logoutLink = document.getElementById('logout');
+
+      // 點擊登出事件處理
+      logoutLink.addEventListener('click', (event) => {
+        event.preventDefault(); // 預防刷新
+
+        fetch('/stepbrothers/logout', {
+          method: 'GET',
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData);
+            if (!responseData.login_status) {
+              // 如果登出成功，導向登入頁
+              alert('登出成功！');
+              window.location.href = '/login';
+            } else {
+              alert('登出失敗！');
+            }
+          })
+          .catch((error) => {
+            console.error('登出請求失敗：', error);
+            alert('登出失敗！');
+          });
+      });
+    </script>
+  </body>
+</html>

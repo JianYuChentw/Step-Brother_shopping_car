@@ -60,7 +60,7 @@
         background-color: rgb(254, 254, 205);
       }
 
-      .order-header {
+      .orderHeader {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
@@ -73,10 +73,15 @@
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
+        margin: 10px 0;
       }
 
-      .order-header h3 {
-        font-size: 1.5rem;
+      .orderHeader h3 {
+        font-size: 1rem;
+        margin: 0;
+        background-color: rgb(176, 176, 176);
+        padding: 5px;
+        border-radius: 5px;
       }
 
       .order-status {
@@ -136,7 +141,7 @@
       <a href="/kid">童</a>
       <a href="/userpage">使用者</a>
       <a href="/historyPage">歷史訂單</a>
-      <a href="/stepbrothers/shopping_car">購物車</a>
+      <a href="/shoppingCar">購物車</a>
       <a href="/login">登入頁</a>
       <a id="logout" href="/stepbrothers/logout">登出</a>
     </nav>
@@ -146,7 +151,7 @@
     </div>
 
     <script>
-      // 在全局范围内定义一个函数来处理展开和收缩的交互
+      // 展開與收縮
       function toggleProductList(orderDiv) {
         const productList = orderDiv.querySelector('.product-list');
         productList.classList.toggle('hidden');
@@ -182,19 +187,22 @@
       fetch('/stepbrothers/purchase_history')
         .then((response) => response.json())
         .then((historyData) => {
-          historyData.forEach((order) => {
+          historyData.reverse().forEach((order) => {
             const orderDiv = document.createElement('div');
             orderDiv.classList.add('order');
 
             // 創建訂單標題
             const orderHeader = document.createElement('div');
-            orderHeader.classList.add('order-header');
+            orderHeader.classList.add('orderHeader');
 
             const orderTitle = document.createElement('div');
             orderTitle.classList.add('orderTitle');
 
             const orderId = document.createElement('h3');
-            orderId.textContent = `訂單編號: ${order.id}`;
+            orderId.textContent = `訂單編號 : ${order.id}`;
+
+            const orderTime = document.createElement('span');
+            orderTime.textContent = `購買時間: ${order.time}`;
 
             const orderStatus = document.createElement('span');
             orderStatus.classList.add('order-status');
@@ -225,7 +233,8 @@
             orderSummary.classList.add('order-summary');
             orderSummary.textContent = `總金額: $${order.sum}`;
 
-            orderTitle.appendChild(orderId);
+            orderHeader.appendChild(orderId);
+            orderTitle.appendChild(orderTime);
             orderTitle.appendChild(orderStatus);
             orderTitle.appendChild(orderSummary);
             orderRecipientInfo.appendChild(recipientName);
@@ -280,33 +289,35 @@
           console.error('Error fetching purchase history:', error);
         });
     </script>
+
     <script>
       // 獲取"登出"連結元素
       const logoutLink = document.getElementById('logout');
 
-      // 點擊登出
-      logoutLink.addEventListener('click', async (event) => {
-        event.preventDefault(); // 阻止默認的連結跳轉行為
+      // 點擊登出事件處理
+      logoutLink.addEventListener('click', (event) => {
+        event.preventDefault(); // 預防刷新
 
-        try {
-          // 發送登出請求到後端的'/stepbrothers/logout'路由
-          const response = await fetch('/stepbrothers/logout', {
-            method: 'GET', // 或 'POST'，取決於你的後端設置
+        fetch('/stepbrothers/logout', {
+          method: 'GET',
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData);
+            if (!responseData.login_status) {
+              alert('您尚未登入！');
+            } else if (responseData.login_status) {
+              // 如果登出成功，導向登入頁
+              alert('登出成功！');
+              window.location.href = '/login';
+            } else {
+              alert('登出失敗！');
+            }
+          })
+          .catch((error) => {
+            console.error('登出請求失敗：', error);
+            alert('登出失敗！');
           });
-
-          if (response.ok) {
-            // 如果登出成功，顯示成功消息
-            alert('登出成功！');
-            // 你可以在這裡添加額外的處理，例如重定向到登入頁面
-            window.location.href = '/login'; // 重定向到登入頁面，這部分可以根據你的需要調整
-          } else {
-            // 如果登出失敗，顯示錯誤消息
-            alert('登出失敗。');
-          }
-        } catch (error) {
-          console.error('登出請求失敗：', error);
-          alert('登出失敗。');
-        }
       });
     </script>
   </body>
