@@ -163,11 +163,13 @@
 
             addToCartBtn.addEventListener('click', () => {
               const product_size = sizeSelect.value;
-              const quantity = quantityInput.value;
-              console.log(product_size, quantity);
+              const product_quantity = quantityInput.value;
 
-              if (product_size && quantity) {
-                // 發送POST請求以將商品添加到購物車
+              if (product_size && product_quantity) {
+                // 禁用按鈕以防止多次點擊
+                addToCartBtn.disabled = true;
+
+                // 發送 POST 請求以將商品添加到購物車
                 fetch(`/stepbrothers/${id}/add`, {
                   method: 'POST',
                   headers: {
@@ -175,7 +177,7 @@
                   },
                   body: JSON.stringify({
                     product_size: product_size,
-                    quantity: quantity,
+                    quantity: product_quantity,
                   }),
                 })
                   .then((response) => response.json())
@@ -194,6 +196,10 @@
                   .catch((error) => {
                     console.error('發生錯誤：', error);
                     alert('添加商品到購物車失敗。');
+                  })
+                  .finally(() => {
+                    // 無論請求成功或失敗，都要啟用按鈕
+                    addToCartBtn.disabled = false;
                   });
               } else {
                 alert('請選擇尺寸並輸入數量。');
