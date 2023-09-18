@@ -92,7 +92,7 @@ async function create_shopping_cart(user_id, product_id, size_id, quantity) {
 
     if (car_results.length > 0) {
       const existing_quantity = car_results[0].quantity;
-      const new_quantity = existing_quantity + quantity;
+      const new_quantity = existing_quantity + Number(quantity);
       const new_subtotal = price * new_quantity;
       const new_final_price = new_subtotal * discount_rate;
 
