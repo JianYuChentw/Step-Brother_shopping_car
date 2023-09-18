@@ -297,13 +297,16 @@
             cancelOrderButton.classList.add('cancel-order-button');
             productList.appendChild(cancelOrderButton);
 
+            // 判斷條件並設定按鈕的 disabled 屬性
+            if (order.purchases[0].purchase_status !== 1) {
+              cancelOrderButton.disabled = true;
+            }
+
             // 添加點擊事件處理程序，檢查條件並執行取消訂單的動作
             cancelOrderButton.addEventListener('click', () => {
               if (order.purchases[0].purchase_status === 1) {
                 // 執行取消訂單的API請求
                 cancelOrder(order.time);
-              } else {
-                alert('無法異動此訂單。');
               }
             });
 
