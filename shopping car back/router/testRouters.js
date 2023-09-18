@@ -63,6 +63,12 @@ routes.get('/checkPage', (req, res) => {
   res.sendFile(filePath);
 });
 
+// 導向到註冊頁面 測試用
+routes.get('/register_page', (req, res) => {
+  const filePath = path.join(__dirname, '../views/registerPage.html');
+  res.sendFile(filePath);
+});
+
 //網頁
 routes.get('/stepbrothers', page.home_page);
 routes.get('/stepbrothers/man', page.man_page);

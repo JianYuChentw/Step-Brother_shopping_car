@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>註冊</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      #registration-form {
+        width: 50vw;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type='text'],
+      input[type='password'],
+      input[type='email'] {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      input[type='submit'] {
+        width: 100%;
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type='submit']:hover {
+        background-color: #555;
+      }
+
+      #registration-result {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>註冊</h1>
+    <form id="registration-form">
+      <label for="new_account">帳號:</label>
+      <input type="text" id="new_account" name="new_account" required />
+
+      <label for="new_password">密碼:</label>
+      <input type="password" id="new_password" name="new_password" required />
+
+      <label for="new_name">姓名:</label>
+      <input type="text" id="new_name" name="new_name" required />
+
+      <label for="new_phone_number">電話號碼:</label>
+      <input
+        type="text"
+        id="new_phone_number"
+        name="new_phone_number"
+        required
+      />
+
+      <label for="new_email">Email:</label>
+      <input type="email" id="new_email" name="new_email" required />
+
+      <input type="submit" value="註冊" style="background-color: red" />
+    </form>
+
+    <div id="registration-result"></div>
+
+    <script>
+      // 獲取表單元素
+      const registrationForm = document.getElementById('registration-form');
+      const registrationResult = document.getElementById('registration-result');
+
+      // 添加表單提交事件處理程序
+      registrationForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // 防止表單自動提交
+
+        // 創建包含表單數據的 JSON 物件
+        const formData = {
+          new_account: document.getElementById('new_account').value,
+          new_password: document.getElementById('new_password').value,
+          new_name: document.getElementById('new_name').value,
+          new_phone_number: document.getElementById('new_phone_number').value,
+          new_email: document.getElementById('new_email').value,
+        };
+
+        try {
+          const response = await fetch('/stepbrothers/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json', // 設置請求的 Content-Type 為 JSON
+            },
+            body: JSON.stringify(formData), // 轉換為 JSON 字符串
+          });
+          const data = await response.json();
+          console.log(data);
+
+          if (data.register_result) {
+            alert('註冊成功！');
+            window.location.href = '/login';
+          } else {
+            registrationResult.innerHTML = '註冊失敗。';
+          }
+        } catch (error) {
+          console.error('註冊時出現錯誤：', error);
+          registrationResult.innerHTML = '伺服器錯誤，請稍後再試。';
+        }
+      });
+    </script>
+  </body>
+</html>
