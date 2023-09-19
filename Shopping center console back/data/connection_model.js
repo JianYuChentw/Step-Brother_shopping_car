@@ -8,6 +8,15 @@ const connection = mysql.createPool({
   database: 'e-commerce-website',
 });
 
+// 資料庫連線資料線上部署用 "測試用資料庫！！"
+// const connection = mysql.createPool({
+//   host: 'zeabur-gcp-asia-east1-1.clusters.zeabur.com',
+//   user: 'root',
+//   password: '821NfxPoY946',
+//   port: 30674,
+//   database: 'e-commerce-website',
+// });
+
 // 測試資料庫連線
 async function test_connection() {
   try {
