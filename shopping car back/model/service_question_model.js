@@ -1,4 +1,4 @@
-const { connection } = require('../model/connection_model');
+const { connection } = require('../data/connection_model');
 
 // 讀取全部客服QA
 async function get_customer_service_QA() {

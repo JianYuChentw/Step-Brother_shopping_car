@@ -1,4 +1,4 @@
-const { connection } = require('../model/connection_model');
+const { connection } = require('../data/connection_model');
 const { format_date_time } = require('./tool_model'); // 格式化時間
 
 // 註冊 (帳號、電話、郵件不能重複)

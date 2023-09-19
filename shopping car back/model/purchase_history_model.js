@@ -1,4 +1,4 @@
-const { connection } = require('../model/connection_model');
+const { connection } = require('../data/connection_model');
 const { format_date_time } = require('./tool_model'); // 格式化時間
 
 // 全部歷史訂單資料

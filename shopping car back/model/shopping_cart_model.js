@@ -1,4 +1,4 @@
-const { connection } = require('../model/connection_model');
+const { connection } = require('../data/connection_model');
 const purchase_history = require('../model/purchase_history_model');
 const tool = require('../model/tool_model');
 const product = require('../model/product_data_model');

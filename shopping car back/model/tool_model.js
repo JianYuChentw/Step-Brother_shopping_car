@@ -1,4 +1,4 @@
-const { connection } = require('../model/connection_model');
+const { connection } = require('../data/connection_model');
 const jwt = require('jsonwebtoken'); //JWT模組
 
 //! token -----------------------------
