@@ -183,7 +183,13 @@ async function login(user_account, password) {
     user.update_time = format_date_time(user.update_time);
 
     if (user.login_status === 1) {
+      //重複登入踢下線 修改 login_status 為 0
+      const update_result = await connection.query(
+        'UPDATE `user_data` SET `login_status` = 0 WHERE `id` = ?;',
+        [user.id]
+      );
       console.log('該使用者已登入');
+
       return false;
     }
 
