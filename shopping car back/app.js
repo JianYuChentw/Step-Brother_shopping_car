@@ -3,11 +3,18 @@ const session = require('express-session');
 const cors = require('cors'); //跨來源資源共享模組
 const path = require('path');
 
+// 導入swaggerUi與文件
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
+
 // const routes = require('./router/routers');
-const routes = require('./router/testRouters'); // 線上部署用
 const tool = require('./model/tool_model');
-const port = process.env.PORT || 3000; // 線上部署用
 // const port = 3000;
+
+// 線上部署的環境變數設定及路由
+const routes = require('./router/testRouters'); // 路由
+const port = process.env.PORT || 3000; // 埠號添加環境變數
+
 const app = express();
 
 //* 啟動ejs
@@ -43,6 +50,9 @@ app.use(sessionMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', routes);
+
+// 調用SwaggerUi必須設定於app使用express之下
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //監聽port
 app.listen(port, () => {

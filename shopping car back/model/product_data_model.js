@@ -361,7 +361,7 @@ async function get_product_data() {
       WHERE pd.product_data_status = 1
     `;
     const [results] = await connection.query(query);
-    console.log('產品資料', results);
+    console.log('產品資料', `共計${results.length}項`);
     return results;
   } catch (error) {
     console.error('無法獲取產品資料:', error);

@@ -1,0 +1,1392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Step Brother shopping site",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/stepbrothers": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "官網首頁，取得所有商品摘要。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "brand_name": {
+                    "type": "string",
+                    "example": "NEW BALANCE"
+                  },
+                  "product_name": {
+                    "type": "string",
+                    "example": "Fresh Foam Hierro v7 MTHIERR7"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 2800
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "man"
+                  },
+                  "product_data_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/man": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得所有男性商品摘要。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "brand_name": {
+                    "type": "string",
+                    "example": "NEW BALANCE"
+                  },
+                  "product_name": {
+                    "type": "string",
+                    "example": "Fresh Foam Hierro v7 MTHIERR7"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 2800
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "man"
+                  },
+                  "product_data_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/woman": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得所有女性商品摘要。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 16
+                  },
+                  "brand_name": {
+                    "type": "string",
+                    "example": "NIKE"
+                  },
+                  "product_name": {
+                    "type": "string",
+                    "example": "Tech Hera"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 3100
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "woman"
+                  },
+                  "product_data_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/kids": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得所有兒童商品摘要。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 31
+                  },
+                  "brand_name": {
+                    "type": "string",
+                    "example": "PUMA"
+                  },
+                  "product_name": {
+                    "type": "string",
+                    "example": "X-Ray Speed Lite"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 1200
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "kids"
+                  },
+                  "product_data_status": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/user": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得會員的相關資訊。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "account": {
+                  "type": "string",
+                  "example": "meowmeow123"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "NianYaoBro"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "0912345678"
+                },
+                "mail": {
+                  "type": "string",
+                  "example": "bunnyboy@gmail.com"
+                },
+                "grade": {
+                  "type": "number",
+                  "example": 3
+                },
+                "create_time": {
+                  "type": "string",
+                  "example": "2023/07/20 15:56:53"
+                },
+                "update_time": {
+                  "type": "string",
+                  "example": "2023/07/20 22:53:07"
+                },
+                "purchase_CA": {
+                  "type": "number",
+                  "example": 113820
+                },
+                "login_status": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/purchase_history": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得會員的相關購物紀錄。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 25
+                  },
+                  "time": {
+                    "type": "string",
+                    "example": "2023-09-11 16:58:51"
+                  },
+                  "user_id": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "NianYaoBro"
+                  },
+                  "recipient_name": {
+                    "type": "string",
+                    "example": "superNB"
+                  },
+                  "recipient_phone": {
+                    "type": "string",
+                    "example": "0912345678"
+                  },
+                  "recipient_address": {
+                    "type": "string",
+                    "example": "rm owejfojwpjp;ojsdklhgl"
+                  },
+                  "purchases": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "brand_name": {
+                          "type": "string",
+                          "example": "NEW BALANCE"
+                        },
+                        "product_name": {
+                          "type": "string",
+                          "example": "Fresh Foam Trail More"
+                        },
+                        "size": {
+                          "type": "number",
+                          "example": 9
+                        },
+                        "price": {
+                          "type": "number",
+                          "example": 4000
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "subtotal": {
+                          "type": "number",
+                          "example": 4000
+                        },
+                        "purchase_status": {
+                          "type": "number",
+                          "example": 4
+                        }
+                      }
+                    }
+                  },
+                  "sum": {
+                    "type": "number",
+                    "example": 9180
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/shopping_car": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得會員的購物車內容。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "grade": {
+                  "type": "number",
+                  "example": 3
+                },
+                "shopping_cart": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 65
+                      },
+                      "user_id": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "account": {
+                        "type": "string",
+                        "example": "meowmeow123"
+                      },
+                      "product_id": {
+                        "type": "number",
+                        "example": 12
+                      },
+                      "brand_name": {
+                        "type": "string",
+                        "example": "PUMA"
+                      },
+                      "product_name": {
+                        "type": "string",
+                        "example": "Anzarun 2.0"
+                      },
+                      "class": {
+                        "type": "string",
+                        "example": "man"
+                      },
+                      "us_size": {
+                        "type": "number",
+                        "example": 9
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "subtotal": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "final_price": {
+                        "type": "number",
+                        "example": 900
+                      },
+                      "shopping_status": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "check_out_status": {
+                        "type": "number",
+                        "example": 0
+                      }
+                    }
+                  }
+                },
+                "shopping_cart_sum": {
+                  "type": "object",
+                  "properties": {
+                    "final_total": {
+                      "type": "number",
+                      "example": 900
+                    },
+                    "original_total": {
+                      "type": "number",
+                      "example": 1000
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/login_page": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "可以輸入帳號及密碼，若以登入則無法進入該頁",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/register_page": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "可以填寫相關資訊方得註冊為會員，若以登入則無法進入該頁。",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/check_out": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "可以確認給物車內容，並填寫相關收件資訊。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_grade": {
+                  "type": "number",
+                  "example": 3
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "NianYaoBro"
+                },
+                "user_phone": {
+                  "type": "string",
+                  "example": "0912345678"
+                },
+                "user_mail": {
+                  "type": "string",
+                  "example": "bunnyboy@gmail.com"
+                },
+                "shopping_cart": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 65
+                      },
+                      "user_id": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "account": {
+                        "type": "string",
+                        "example": "meowmeow123"
+                      },
+                      "product_id": {
+                        "type": "number",
+                        "example": 12
+                      },
+                      "brand_name": {
+                        "type": "string",
+                        "example": "PUMA"
+                      },
+                      "product_name": {
+                        "type": "string",
+                        "example": "Anzarun 2.0"
+                      },
+                      "class": {
+                        "type": "string",
+                        "example": "man"
+                      },
+                      "us_size": {
+                        "type": "number",
+                        "example": 9
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "subtotal": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "final_price": {
+                        "type": "number",
+                        "example": 900
+                      },
+                      "shopping_status": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "check_out_status": {
+                        "type": "number",
+                        "example": 0
+                      }
+                    }
+                  }
+                },
+                "shopping_cart_sum": {
+                  "type": "object",
+                  "properties": {
+                    "final_total": {
+                      "type": "number",
+                      "example": 900
+                    },
+                    "original_total": {
+                      "type": "number",
+                      "example": 1000
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/update_user_data_page": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "會取得會員部分資訊，可以填寫欲修改的會員資訊。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "NianYaoBro"
+                },
+                "user_account": {
+                  "type": "string",
+                  "example": "meowmeow123"
+                },
+                "user_password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "user_phone_number": {
+                  "type": "string",
+                  "example": "0912345678"
+                },
+                "user_email": {
+                  "type": "string",
+                  "example": "bunnyboy@gmail.com"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/customer_service": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "可以輸入預設的問題，得到預設的回答。",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login_status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "service_question": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "question": {
+                        "type": "string",
+                        "example": "會員等級計算方式"
+                      },
+                      "answer": {
+                        "type": "string",
+                        "example": "會員累積消費滿5000時將成為銀牌會員，銀牌折扣9.5折，會員累積消費滿10000時將成為金牌會員，金牌折扣9折。"
+                      },
+                      "exist_status": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/product_search": {
+      "post": {
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "關鍵字搜尋商品。",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 7
+                  },
+                  "brand_name": {
+                    "type": "string",
+                    "example": "NIKE"
+                  },
+                  "product_name": {
+                    "type": "string",
+                    "example": "Invincible Run 3"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 5500
+                  },
+                  "class": {
+                    "type": "string",
+                    "example": "man"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/login": {
+      "post": {
+        "tags": [
+          "Member rights"
+        ],
+        "description": "發送輸入的帳號及密碼。",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "帳號及密碼.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login_status": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/logout": {
+      "get": {
+        "tags": [
+          "Member rights"
+        ],
+        "description": "登出會員，並移除賦予之相關憑證。",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login_status": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/register": {
+      "post": {
+        "tags": [
+          "Member rights"
+        ],
+        "description": "發送輸入註冊相關資訊。",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "帳號及密碼.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "new_account": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "new_password": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "new_name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "new_phone_number": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "new_email": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login_status": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/submit_update_user_data": {
+      "put": {
+        "tags": [
+          "Member rights"
+        ],
+        "description": "發送更新會員資料。",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "必要{新的或舊的密碼}、新的電話號碼、新的Email",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "change_password": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "change_phone_number": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "change_email": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "change_result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/submit_forget_password": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrother/cancel_order": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/{id}/add": {
+      "post": {
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "將商品加入購物車。",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "指定尺寸及數量。",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_size": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "quantity": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "add_to_cart": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/update_shopping_car_quantity": {
+      "post": {
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "異動購物車商品數量",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "指定購物車id及數量。",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "shopping_car_id": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "quantity": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "grade": {
+                  "type": "number",
+                  "example": 3
+                },
+                "shopping_cart": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 65
+                      },
+                      "user_id": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "account": {
+                        "type": "string",
+                        "example": "meowmeow123"
+                      },
+                      "product_id": {
+                        "type": "number",
+                        "example": 12
+                      },
+                      "brand_name": {
+                        "type": "string",
+                        "example": "PUMA"
+                      },
+                      "product_name": {
+                        "type": "string",
+                        "example": "Anzarun 2.0"
+                      },
+                      "class": {
+                        "type": "string",
+                        "example": "man"
+                      },
+                      "us_size": {
+                        "type": "number",
+                        "example": 9
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "subtotal": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "final_price": {
+                        "type": "number",
+                        "example": 900
+                      },
+                      "shopping_status": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "check_out_status": {
+                        "type": "number",
+                        "example": 0
+                      }
+                    }
+                  }
+                },
+                "shopping_cart_sum": {
+                  "type": "object",
+                  "properties": {
+                    "final_total": {
+                      "type": "number",
+                      "example": 900
+                    },
+                    "original_total": {
+                      "type": "number",
+                      "example": 1000
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/delete_car": {
+      "put": {
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "移除購物車商品",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "指定購物車id。",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "shopping_car_id": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "grade": {
+                  "type": "number",
+                  "example": 3
+                },
+                "shopping_cart": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "shopping_cart_sum": {
+                  "type": "object",
+                  "properties": {
+                    "final_total": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "original_total": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/submit_shopping_car": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recipient_name": {
+                  "example": "any"
+                },
+                "recipient_phone": {
+                  "example": "any"
+                },
+                "recipient_address": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stepbrothers/{id}": {
+      "get": {
+        "tags": [
+          "Step Brothers page"
+        ],
+        "description": "取得商品詳細資訊。",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 5
+                },
+                "brand_name": {
+                  "type": "string",
+                  "example": "NEW BALANCE"
+                },
+                "product_name": {
+                  "type": "string",
+                  "example": "Fresh Foam Trail More"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 4000
+                },
+                "class": {
+                  "type": "string",
+                  "example": "man"
+                },
+                "product_data_status": {
+                  "type": "number",
+                  "example": 1
+                },
+                "size_stock": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "size": {
+                        "type": "number",
+                        "example": 12
+                      },
+                      "stock": {
+                        "type": "number",
+                        "example": 10
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

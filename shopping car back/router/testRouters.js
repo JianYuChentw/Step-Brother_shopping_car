@@ -8,6 +8,7 @@ const path = require('path');
 // 導向到首頁面 測試用
 routes.get('/', (req, res) => {
   console.log('home');
+  // #Swagger.ignore =true
   const filePath = path.join(__dirname, '../views/home.html');
   res.sendFile(filePath);
 });

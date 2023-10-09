@@ -3,10 +3,7 @@ const { connection } = require('../data/connection_model');
 // 讀取全部客服QA
 async function get_customer_service_QA() {
   try {
-    const query = `
-      SELECT *  FROM customer_service_QA
-      WHERE exixt_status = 1
-    `;
+    const query = `SELECT * FROM customer_service_QA WHERE exist_status = 1`;
     const [results] = await connection.query(query);
     console.log('客服問題', results);
     return results;
