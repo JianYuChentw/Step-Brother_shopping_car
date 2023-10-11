@@ -982,18 +982,25 @@
     },
     "/stepbrothers/submit_forget_password": {
       "post": {
-        "description": "",
+        "tags": [
+          "Member rights"
+        ],
+        "description": "發送會員密碼至設定信箱。",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "輸入註冊用戶的帳號及電話號碼。",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "account": {
+                  "type": "string",
                   "example": "any"
                 },
                 "phone": {
+                  "type": "string",
                   "example": "any"
                 }
               }
@@ -1002,7 +1009,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -1012,15 +1031,21 @@
     },
     "/stepbrother/cancel_order": {
       "put": {
-        "description": "",
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "未出貨訂單取消。",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "購買商品的時間",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "time": {
+                  "type": "string",
                   "example": "any"
                 }
               }
@@ -1029,7 +1054,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cancel_result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -1282,21 +1319,29 @@
     },
     "/stepbrothers/submit_shopping_car": {
       "post": {
-        "description": "",
+        "tags": [
+          "Shopping ability"
+        ],
+        "description": "填寫完收件資料，將訂單送出。",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "指定收件人、收件人電話及收件人地址。",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "recipient_name": {
+                  "type": "string",
                   "example": "any"
                 },
                 "recipient_phone": {
+                  "type": "string",
                   "example": "any"
                 },
                 "recipient_address": {
+                  "type": "string",
                   "example": "any"
                 }
               }
@@ -1305,7 +1350,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "order_result": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
