@@ -132,8 +132,12 @@ async function buy_car_product(req, res) {
     if (id_card == null) {
       return res.json({ login_status: false });
     }
-    const user_id = id_card.id;
     const recipientData = req.body;
+    const user_id = id_card.id;
+    const user_data_result = await user_data.use_id_get_user_data(user_id);
+    recipientData.mail = user_data_result[0].mail;
+    console.log(recipientData);
+
     const name = req.body.recipient_name;
     const phone = req.body.recipient_phone;
     const address = req.body.recipient_address;

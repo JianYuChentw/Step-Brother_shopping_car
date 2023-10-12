@@ -252,7 +252,7 @@ async function service_page(req, res) {
       res.json({ login_status: true, service_question });
     } else {
       // 未登入，回傳登入狀態為false
-      res.json([{ login_status: false }]);
+      res.json({ login_status: false });
     }
   } catch (error) {
     console.error('聯繫客服頁面請求時發生錯誤：', error);
